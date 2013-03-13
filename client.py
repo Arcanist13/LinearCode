@@ -2,7 +2,7 @@ import socket   #for sockets
 import sys  #for exit
 #import pygame
 from thread  import *
-from Codex import *
+from codex import *
 
 users = []
 self_id = -1
