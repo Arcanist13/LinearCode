@@ -30,19 +30,92 @@ def parse(data):
         id = int(params[0])
 		#If the association id does not match the users print the message
         if id != self_id:
-			def CodeCovert():
-				#Apply linear translation based on codex (reverse)
-				def linearTran(msg):
-					for i in range(len(msg)):
-						msg[i] = (msg[i]+(32-(tran)))%32
-						if msg[i] == 0:
-							msg[i] = 32
-					numCode = msg
-					codedMsg(numCode)
+			def decode(msg):
+				for i in range(len(msg)):
+					if msg[i] == 'a':
+						msg[i] = 1
+					elif msg[i] == 'b':
+						msg[i] = 2
+					elif msg[i] == 'c':
+						msg[i] = 3
+					elif msg[i] == 'd':
+						msg[i] = 4
+					elif msg[i] == 'e':
+						msg[i] = 5
+					elif msg[i] == 'f':
+						msg[i] = 6
+					elif msg[i] == 'g':
+						msg[i] = 7
+					elif msg[i] == 'h':
+						msg[i] = 8
+					elif msg[i] == 'i':
+						msg[i] = 9
+					elif msg[i] == 'j':
+						msg[i] = 10
+					elif msg[i] == 'k':
+						msg[i] = 11
+					elif msg[i] == 'l':
+						msg[i] = 12
+					elif msg[i] == 'm':
+						msg[i] = 13
+					elif msg[i] == 'n':
+						msg[i] = 14
+					elif msg[i] == 'o':
+						msg[i] = 15
+					elif msg[i] == 'p':
+						msg[i] = 16
+					elif msg[i] == 'q':
+						msg[i] = 17
+					elif msg[i] == 'r':
+						msg[i] = 18
+					elif msg[i] == 's':
+						msg[i] = 19
+					elif msg[i] == 't':
+						msg[i] = 20
+					elif msg[i] == 'u':
+						msg[i] = 21
+					elif msg[i] == 'v':
+						msg[i] = 22
+					elif msg[i] == 'w':
+						msg[i] = 23
+					elif msg[i] == 'y':
+						msg[i] = 24
+					elif msg[i] == 'x':
+						msg[i] = 25
+					elif msg[i] == 'z':
+						msg[i] = 26
+					elif msg[i] == '!':
+						msg[i] = 27
+					elif msg[i] == '.':
+						msg[i] = 28
+					elif msg[i] == ',':
+						msg[i] = 29
+					elif msg[i] == '?':
+						msg[i] = 30
+					elif msg[i] == '"':
+						msg[i] = 31
+					elif msg[i] == ' ':
+						msg[i] = 32
+					else:
+						return
+				numMsg = msg
+				linearTran(numMsg)
+			
+			#Apply linear translation based on codex (reverse)
+			def linearTran(msg):
+				global tran
+				for i in range(len(msg)):
+					print msg[i]
+					print tran
+					msg[i] = (msg[i]+(32-(tran)))%32
+					if msg[i] == 0:
+						msg[i] = 32
+				numCode = msg
+				codedMsg(numCode)
 
-				#Convert numeric representation to text
-				def codedMsg(msg):
-					for i in range(len(msg)):
+			#Convert numeric representation to text
+			def codedMsg(msg):
+				for i in range(len(msg)):
 						if msg[i] == 1:
 							msg[i] = 'a'
 						elif msg[i] == 2:
@@ -110,15 +183,13 @@ def parse(data):
 						else:
 							print "Invalid syntax. " + "\'" + str(msg[i]) + "\'" + "is not defined."
 							message()
-					codeMsg = msg
-					tmpCode = ""
-					for i in range(len(codeMsg)):
-						tmpCode = str(tmpCode) + str(codeMsg[i])
-					return tmpCode
+				codeMsg = msg
+				tmpCode = ""
+				for i in range(len(codeMsg)):
+					tmpCode = str(tmpCode) + str(codeMsg[i])
+				return tmpCode
 				
-				linearTran(params[1])
-
-			CodeConvert()
+			decode(params[1])
 			print tmpCode
 
 def serverlisten(socket):
@@ -308,14 +379,17 @@ while 1:
 					print "Invalid syntax. " + "\'" + str(msg[i]) + "\'" + "is not defined."
 					message()
 			codeMsg = msg
+			global tmpCode
 			tmpCode = ""
 			for i in range(len(codeMsg)):
 				tmpCode = str(tmpCode) + str(codeMsg[i])
 			return tmpCode
-
+		
+		global tran
 		tran = LinExt(codex)
 		message()
 	
+	global tmpCode
 	CodeCreate()
 	msg = "["+userName+"]" + " " + tmpCode
 	msg.replace(';','')
