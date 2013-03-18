@@ -115,6 +115,7 @@ def parse(data):
 
 			#Convert numeric representation to text
 			def codedMsg(msg):
+				global tmpCode
 				for i in range(len(msg)):
 						if msg[i] == 1:
 							msg[i] = 'a'
@@ -184,11 +185,12 @@ def parse(data):
 							print "Invalid syntax. " + "\'" + str(msg[i]) + "\'" + "is not defined."
 							message()
 				codeMsg = msg
-				tmpCode = ""
 				for i in range(len(codeMsg)):
 					tmpCode = str(tmpCode) + str(codeMsg[i])
 				return tmpCode
 				
+			global tmpCode
+			tmpCode = ""
 			decode(params[1])
 			print tmpCode
 
@@ -216,6 +218,8 @@ print 'Socket Created'
 s.connect((ip,port))
 start_new_thread(serverlisten ,(s,))
 while 1:
+	global tmpCode
+	tmpCode = ""
 	def CodeCreate():
 		#User generation of their message 
 		#Input of code? Possible automation when linked to server)
@@ -389,7 +393,6 @@ while 1:
 		tran = LinExt(codex)
 		message()
 	
-	global tmpCode
 	CodeCreate()
 	msg = "["+userName+"]" + " " + tmpCode
 	msg.replace(';','')
